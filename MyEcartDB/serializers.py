@@ -22,10 +22,6 @@ class ProductsDataSerializer(serializers.ModelSerializer):
     productImage = productImagesSerializer(many= True, source='productDetails' )
     def __init__(self, *args, **kwargs):
         super(ProductsDataSerializer, self).__init__(*args, **kwargs)
-        # # Exclude the field you want to exclude
-        # excluded_field = 'selectedPlan'  
-        # if excluded_field in self.fields:
-        #     del self.fields[excluded_field]
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         category_Name = representation.pop('categoryName')
@@ -40,6 +36,7 @@ class SpecialOffersSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpecialOffersTable
         fields = '__all__'
+
     categoryName = CategoryDataSerializer(many=False, source='specialOffersCategory')
     def __init__(self, *args, **kwargs):
         super(SpecialOffersSerializer, self).__init__(*args, **kwargs)

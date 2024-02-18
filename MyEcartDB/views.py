@@ -37,14 +37,14 @@ def getProductDetailsForID(request,productID):
 def getSpecialOffersDetails(request):
     try:
         SpecialOffersData = SpecialOffersTable.objects.all()
-        serializer = SpecialOffersSerializer(SpecialOffersData, many=False)
+        serializer = SpecialOffersSerializer(SpecialOffersData, many=True)
     except:
         return Response({"error":"Failed to return data"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
-def getCategorysDetailsForID(request):
+def getCategorysDetails(request):
     try:
         CategoryData = CategoryTable.objects.all()
         serializer = CategoryDataSerializer(CategoryData, many=True)
@@ -54,7 +54,7 @@ def getCategorysDetailsForID(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(["GET"])
-def getCategorysDetails(request,categoryID):
+def getCategorysDetailsForID(request,categoryID):
     try:
         CategoryData = CategoryTable.objects.get(id=categoryID)
         serializer = CategoryDataSerializer(CategoryData, many=False)
