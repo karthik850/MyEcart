@@ -1,0 +1,4 @@
+staticfiles
+MyEcartDB/__pycache__/
+Myecart_rs/__pycache__/
+db.sqlite3

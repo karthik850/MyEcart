@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  getCategorysDetails, getCategorysDetailsForID, getProductDetails, getProductDetailsForID, getSpecialOffersDetails
+from .views import  getCategorysDetails, getCategorysDetailsForID, getProductDetails, getProductDetailsForID, getSpecialOffersDetails,getCategorysDetailsForQUery
 
 urlpatterns = [
     # path('login/', userLogin, name='user-login'),
