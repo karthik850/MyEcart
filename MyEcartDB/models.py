@@ -38,11 +38,8 @@ class SpecialOffersTable(models.Model):
     
 class ProductImagesTable(models.Model):
     productName = models.ForeignKey(ProductsTable, related_name="productDetails", on_delete=models.CASCADE,default=1)
-    primaryImage = models.URLField(blank=True)
-    secondImage = models.URLField(blank=True)
-    thirdImage = models.URLField(blank=True)
-    fourthImage = models.URLField(blank=True)
-    fifthImage = models.URLField(blank=True)
+    imageUrl = models.URLField(blank=True)
+
 
     def __str__(self):
         return self.productName.productName

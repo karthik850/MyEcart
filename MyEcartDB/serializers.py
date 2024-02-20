@@ -19,9 +19,23 @@ class ProductsDataSerializer(serializers.ModelSerializer):
         model = ProductsTable
         fields = '__all__'
     categoryName = CategoryDataSerializer(many=False, source='productCategory')
-    productImage = productImagesSerializer(many= True, source='productDetails' )
     def __init__(self, *args, **kwargs):
         super(ProductsDataSerializer, self).__init__(*args, **kwargs)
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        category_Name = representation.pop('categoryName')
+        # Convert list of category and concat to product data
+        representation['categoryName'] = category_Name
+        return representation
+
+class ProductsDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductsTable
+        fields = '__all__'
+    categoryName = CategoryDataSerializer(many=False, source='productCategory')
+    productImage = productImagesSerializer(many= True, source='productDetails' )
+    def __init__(self, *args, **kwargs):
+        super(ProductsDetailsSerializer, self).__init__(*args, **kwargs)
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         category_Name = representation.pop('categoryName')

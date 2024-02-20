@@ -1,7 +1,7 @@
 from rest_framework import generics,status
 
 from .models import ProductsTable, CategoryTable, SpecialOffersTable
-from .serializers import  CategoryDataSerializer, ProductsDataSerializer, SpecialOffersSerializer
+from .serializers import  CategoryDataSerializer, ProductsDataSerializer, ProductsDetailsSerializer, SpecialOffersSerializer
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -33,11 +33,12 @@ def getProductDetails(request):
 
 @api_view(["GET"])
 def getProductDetailsForID(request,productID):
-    try:
-        ProductsData = ProductsTable.objects.get(id=productID)
-        serializer = ProductsDataSerializer(ProductsData, many=False)
-    except:
-        return Response({"error":"Failed to return data"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    # try:
+    ProductsData = ProductsTable.objects.get(id=productID)
+    print(ProductsData)
+    serializer = ProductsDetailsSerializer(ProductsData, many=False)
+    # except:
+    #     return Response({"error":"Failed to return data"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
 
